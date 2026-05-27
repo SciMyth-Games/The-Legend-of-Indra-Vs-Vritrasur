@@ -797,39 +797,54 @@ class ContactForm {
         return;
       }
 
+      // Show sending state on submit button
+      const submitBtn = document.getElementById('form-submit-btn');
+      const originalBtnHtml = submitBtn.innerHTML;
+      submitBtn.disabled = true;
+      submitBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Sending Proposal...';
+
       // Gather input values
       const name = document.getElementById('form-name').value;
       const email = document.getElementById('form-email').value;
       const subject = document.getElementById('form-subject').value;
       const message = document.getElementById('form-message').value;
 
-      // Format mailto link
-      const emailTo = "admin@scimythgames.studio";
-      const emailSubject = encodeURIComponent(`[Indra Game Pitch] ${subject}`);
-      const emailBody = encodeURIComponent(
-        `Hi Team,\n\n` +
-        `You have received a new proposal through the Legend of Indra vs Vritrasur website.\n\n` +
-        `Sender Details:\n` +
-        `---------------------\n` +
-        `Name: ${name}\n` +
-        `Email: ${email}\n` +
-        `Subject: ${subject}\n\n` +
-        `Proposal / Message:\n` +
-        `---------------------\n` +
-        `${message}\n\n` +
-        `Regards,\n` +
-        `${name}`
-      );
+      // Web3Forms payload
+      const formData = {
+        access_key: "dc50ab3d-b2df-4b4e-965a-1fb3bc7627ad",
+        name: name,
+        email: email,
+        subject: `[Indra Game Pitch] ${subject}`,
+        message: message
+      };
 
-      // Open user's email client
-      window.location.href = `mailto:${emailTo}?subject=${emailSubject}&body=${emailBody}`;
-
-      // Show success notification and reset form
-      this.showNotification(
-        'Opening your email client to send the proposal! ⚡',
-        'success'
-      );
-      this.form.reset();
+      fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        },
+        body: JSON.stringify(formData)
+      })
+      .then(async (response) => {
+        let json = await response.json();
+        if (response.status === 200) {
+          this.showNotification('Your proposal has been sent successfully! ⚡', 'success');
+          this.form.reset();
+        } else {
+          console.error(json);
+          this.showNotification(json.message || 'Something went wrong. Please try again.', 'error');
+        }
+      })
+      .catch((error) => {
+        console.error(error);
+        this.showNotification('Network error. Please check your connection.', 'error');
+      })
+      .finally(() => {
+        // Revert submit button back to normal
+        submitBtn.disabled = false;
+        submitBtn.innerHTML = originalBtnHtml;
+      });
     });
   }
 
