@@ -1678,6 +1678,112 @@ a {
   color: var(--text-primary);
 }
 
+/* Featured Video Showcase */
+.video-showcase-panel {
+  max-width: 1000px;
+  margin: 0 auto 4rem auto;
+  background: var(--storm-navy);
+  border: 1px solid var(--glass-border);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6), 0 0 30px rgba(124, 58, 237, 0.15);
+  transition: border-color var(--transition-medium), box-shadow var(--transition-medium);
+}
+
+.video-showcase-panel:hover {
+  border-color: rgba(245, 158, 11, 0.3);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.7), 0 0 40px rgba(124, 58, 237, 0.25);
+}
+
+.video-player-wrapper {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16/9;
+  overflow: hidden;
+  background: #000;
+}
+
+.video-poster-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 5;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+.video-poster-overlay::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(5, 5, 16, 0.45);
+  transition: background var(--transition-fast);
+}
+
+.video-poster-overlay:hover::before {
+  background: rgba(5, 5, 16, 0.3);
+}
+
+.video-play-btn {
+  position: relative;
+  z-index: 6;
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--vajra-gold), var(--celestial-gold));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--void-black);
+  font-size: 2rem;
+  box-shadow: 0 0 30px rgba(245, 158, 11, 0.5);
+  transition: transform var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+.video-poster-overlay:hover .video-play-btn {
+  transform: scale(1.1);
+  box-shadow: 0 0 40px var(--vajra-gold);
+}
+
+.video-showcase-tabs {
+  display: flex;
+  background: rgba(255, 255, 255, 0.02);
+  border-top: 1px solid var(--glass-border);
+  overflow: hidden;
+}
+
+.video-tab-btn {
+  flex: 1;
+  padding: 1.25rem;
+  background: transparent;
+  border: none;
+  color: var(--text-secondary);
+  font-family: var(--font-heading);
+  font-size: 0.9rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: background var(--transition-fast), color var(--transition-fast);
+}
+
+.video-tab-btn:not(:last-child) {
+  border-right: 1px solid var(--glass-border);
+}
+
+.video-tab-btn:hover {
+  background: rgba(255, 255, 255, 0.04);
+  color: var(--text-primary);
+}
+
+.video-tab-btn.active {
+  background: rgba(124, 58, 237, 0.1);
+  color: var(--text-primary);
+}
+
 /* Gallery Modal */
 .gallery-modal {
   position: fixed;

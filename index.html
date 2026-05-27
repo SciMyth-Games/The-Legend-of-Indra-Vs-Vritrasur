@@ -783,36 +783,40 @@
           Explore renders, environmental vistas, and key character concepts from the game prototype files.
         </p>
       </div>
-      
+      <!-- Featured Video Showcase Panel -->
+      <div class="video-showcase-panel reveal">
+        <!-- Player Container -->
+        <div class="video-player-wrapper">
+          <!-- Poster / Play Overlay -->
+          <div class="video-poster-overlay" id="featured-video-poster" style="background-image: url('https://img.youtube.com/vi/znIVN4u2Osk/maxresdefault.jpg');">
+            <div class="video-play-btn interactive">
+              <i class="fa-solid fa-play" style="margin-left: 5px;"></i>
+            </div>
+          </div>
+          <!-- Real Iframe (Created dynamically on click) -->
+          <div id="featured-video-player" style="width: 100%; height: 100%;"></div>
+        </div>
+        
+        <!-- Video Selector Tabs -->
+        <div class="video-showcase-tabs">
+          <button class="video-tab-btn active interactive" data-video-id="znIVN4u2Osk">
+            <i class="fa-solid fa-gamepad" style="margin-right: 8px; color: var(--vajra-gold);"></i> Gameplay Showcase
+          </button>
+          <button class="video-tab-btn interactive" data-video-id="f-XdRkMnMCo">
+            <i class="fa-solid fa-film" style="margin-right: 8px; color: var(--electric-cyan);"></i> Cinematic Cutscene
+          </button>
+        </div>
+      </div>
+
       <!-- Filters -->
       <div class="gallery-filters reveal">
-        <button class="gallery-filter-btn active interactive" data-filter="all">All Media</button>
-        <button class="gallery-filter-btn interactive" data-filter="videos">Videos</button>
+        <button class="gallery-filter-btn active interactive" data-filter="all">All Renders</button>
         <button class="gallery-filter-btn interactive" data-filter="characters">Characters</button>
         <button class="gallery-filter-btn interactive" data-filter="environments">Environments</button>
       </div>
       
       <!-- Grid -->
       <div class="gallery-grid stagger">
-        <!-- Item: Gameplay Video -->
-        <div class="gallery-item reveal-scale" data-category="videos" data-video="https://www.youtube.com/embed/znIVN4u2Osk">
-          <img src="https://img.youtube.com/vi/znIVN4u2Osk/maxresdefault.jpg" alt="Gameplay Showcase">
-          <div class="gallery-overlay">
-            <span class="gallery-icon"><i class="fa-solid fa-play"></i></span>
-            <span class="gallery-label">Gameplay Showcase</span>
-          </div>
-        </div>
-
-        <!-- Item: Cutscene Video -->
-        <div class="gallery-item reveal-scale" data-category="videos" data-video="https://www.youtube.com/embed/f-XdRkMnMCo">
-          <img src="https://img.youtube.com/vi/f-XdRkMnMCo/maxresdefault.jpg" alt="Cinematic Cutscene">
-          <div class="gallery-overlay">
-            <span class="gallery-icon"><i class="fa-solid fa-play"></i></span>
-            <span class="gallery-label">Cinematic Cutscene</span>
-          </div>
-        </div>
-
-        <!-- Item 1 -->
         <div class="gallery-item reveal-scale" data-category="environments">
           <img src="assets/images/gameplay-1.png" alt="Mountain Hermitage" data-full="assets/images/gameplay-1.png">
           <div class="gallery-overlay">

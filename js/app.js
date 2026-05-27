@@ -724,6 +724,59 @@ class GallerySystem {
 
 
 /* ─────────────────────────────────────────────────────────────────────────────
+ *  MODULE 7.5 — FEATURED VIDEO SHOWCASE
+ *  Handles switching and loading of the featured YouTube videos in the big panel
+ * ───────────────────────────────────────────────────────────────────────────── */
+
+class VideoShowcase {
+  constructor() {
+    this.poster = document.getElementById('featured-video-poster');
+    this.player = document.getElementById('featured-video-player');
+    this.tabBtns = document.querySelectorAll('.video-tab-btn');
+    
+    this.currentVideoId = 'znIVN4u2Osk'; // Default Gameplay video
+    
+    this.init();
+  }
+  
+  init() {
+    if (!this.poster || !this.player) return;
+    
+    // Play on poster click
+    this.poster.addEventListener('click', () => {
+      this.playVideo();
+    });
+    
+    // Switch tabs
+    this.tabBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const videoId = btn.getAttribute('data-video-id');
+        if (videoId === this.currentVideoId) return;
+        
+        // Update active tab styles
+        this.tabBtns.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        
+        // Update current video and state
+        this.currentVideoId = videoId;
+        
+        // Reset player state (remove old iframe, show poster)
+        this.player.innerHTML = '';
+        this.poster.style.display = 'flex';
+        this.poster.style.backgroundImage = `url('https://img.youtube.com/vi/${videoId}/maxresdefault.jpg')`;
+      });
+    });
+  }
+  
+  playVideo() {
+    this.poster.style.display = 'none';
+    this.player.innerHTML = `<iframe src="https://www.youtube.com/embed/${this.currentVideoId}?autoplay=1" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen style="width: 100%; height: 100%; border: none;"></iframe>`;
+  }
+}
+
+
+
+/* ─────────────────────────────────────────────────────────────────────────────
  *  MODULE 8 — TYPEWRITER EFFECT
  *  Character-by-character text reveal with blinking cursor
  * ───────────────────────────────────────────────────────────────────────────── */
@@ -1017,6 +1070,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const nav          = new Navigation();
   const parallax     = new ParallaxEngine();
   const gallery      = new GallerySystem();
+  const videoShowcase = new VideoShowcase();
   const timeline     = new TimelineProgress();
   const contactForm  = new ContactForm();
   const charCarousel = new CinematicCarousel('characters-slider', 'char-prev-btn', 'char-next-btn');
