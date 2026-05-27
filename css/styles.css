@@ -1682,8 +1682,8 @@ a {
 .videos-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 2rem;
-  max-width: 1400px;
+  gap: 2.2rem;
+  max-width: 1500px;
   margin: 0 auto 4rem auto;
 }
 
@@ -1759,28 +1759,21 @@ a {
 }
 
 .video-card-info {
-  padding: 1.75rem 1.5rem;
+  padding: 1.5rem;
   border-top: 1px solid var(--glass-border);
   flex-grow: 1;
   display: flex;
   flex-direction: column;
-}
-
-.video-card-tag {
-  font-family: var(--font-heading);
-  font-size: 0.75rem;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: var(--vajra-gold);
-  margin-bottom: 0.5rem;
-  display: inline-block;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
 }
 
 .video-card-title {
   font-family: var(--font-heading);
-  font-size: 1.2rem;
+  font-size: 1.25rem;
   color: var(--text-primary);
-  margin-bottom: 0.75rem;
+  margin-bottom: 0;
   letter-spacing: 0.05em;
 }
 
