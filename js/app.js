@@ -612,11 +612,16 @@ class GallerySystem {
     document.addEventListener('click', (e) => {
       const item = e.target.closest('.gallery-item');
       if (item) {
-        const img = item.querySelector('img');
-        if (img) {
-          // Use data-full attribute if present, otherwise the displayed src
-          const fullSrc = img.getAttribute('data-full') || img.src;
-          this.openModal(fullSrc);
+        const videoUrl = item.getAttribute('data-video');
+        if (videoUrl) {
+          this.openVideoModal(videoUrl);
+        } else {
+          const img = item.querySelector('img');
+          if (img) {
+            // Use data-full attribute if present, otherwise the displayed src
+            const fullSrc = img.getAttribute('data-full') || img.src;
+            this.openModal(fullSrc);
+          }
         }
       }
     });
@@ -626,7 +631,7 @@ class GallerySystem {
       this.closeBtn.addEventListener('click', () => this.closeModal());
     }
 
-    // Click outside the image
+    // Click outside the image/video
     if (this.modal) {
       this.modal.addEventListener('click', (e) => {
         if (e.target === this.modal) this.closeModal();
@@ -661,10 +666,39 @@ class GallerySystem {
     });
   }
 
-  /* — Open lightbox — */
+  /* — Open image lightbox — */
   openModal(src) {
     if (!this.modal || !this.modalImg) return;
+    
+    // Hide video container, show image
+    const videoContainer = document.getElementById('gallery-modal-video-container');
+    if (videoContainer) {
+      videoContainer.innerHTML = '';
+      videoContainer.style.display = 'none';
+    }
+    this.modalImg.style.display = '';
+    
     this.modalImg.src = src;
+    this.modal.classList.add('active');
+    document.body.style.overflow = 'hidden';
+  }
+
+  /* — Open video lightbox — */
+  openVideoModal(url) {
+    if (!this.modal) return;
+    
+    // Hide image, show video container
+    if (this.modalImg) {
+      this.modalImg.style.display = 'none';
+      this.modalImg.src = '';
+    }
+    const videoContainer = document.getElementById('gallery-modal-video-container');
+    if (videoContainer) {
+      videoContainer.style.display = 'block';
+      // Embed YouTube iframe with autoplay enabled
+      videoContainer.innerHTML = `<iframe src="${url}?autoplay=1" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen style="width: 100%; height: 100%; border: none; border-radius: var(--radius-md);"></iframe>`;
+    }
+    
     this.modal.classList.add('active');
     document.body.style.overflow = 'hidden';
   }
@@ -674,6 +708,17 @@ class GallerySystem {
     if (!this.modal) return;
     this.modal.classList.remove('active');
     document.body.style.overflow = '';
+    
+    // Stop and clear video
+    const videoContainer = document.getElementById('gallery-modal-video-container');
+    if (videoContainer) {
+      videoContainer.innerHTML = '';
+      videoContainer.style.display = 'none';
+    }
+    if (this.modalImg) {
+      this.modalImg.src = '';
+      this.modalImg.style.display = '';
+    }
   }
 }
 

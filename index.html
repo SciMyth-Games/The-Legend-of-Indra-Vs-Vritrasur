@@ -786,13 +786,32 @@
       
       <!-- Filters -->
       <div class="gallery-filters reveal">
-        <button class="gallery-filter-btn active interactive" data-filter="all">All Renders</button>
+        <button class="gallery-filter-btn active interactive" data-filter="all">All Media</button>
+        <button class="gallery-filter-btn interactive" data-filter="videos">Videos</button>
         <button class="gallery-filter-btn interactive" data-filter="characters">Characters</button>
         <button class="gallery-filter-btn interactive" data-filter="environments">Environments</button>
       </div>
       
       <!-- Grid -->
       <div class="gallery-grid stagger">
+        <!-- Item: Gameplay Video -->
+        <div class="gallery-item reveal-scale" data-category="videos" data-video="https://www.youtube.com/embed/znIVN4u2Osk">
+          <img src="https://img.youtube.com/vi/znIVN4u2Osk/maxresdefault.jpg" alt="Gameplay Showcase">
+          <div class="gallery-overlay">
+            <span class="gallery-icon"><i class="fa-solid fa-play"></i></span>
+            <span class="gallery-label">Gameplay Showcase</span>
+          </div>
+        </div>
+
+        <!-- Item: Cutscene Video -->
+        <div class="gallery-item reveal-scale" data-category="videos" data-video="https://www.youtube.com/embed/f-XdRkMnMCo">
+          <img src="https://img.youtube.com/vi/f-XdRkMnMCo/maxresdefault.jpg" alt="Cinematic Cutscene">
+          <div class="gallery-overlay">
+            <span class="gallery-icon"><i class="fa-solid fa-play"></i></span>
+            <span class="gallery-label">Cinematic Cutscene</span>
+          </div>
+        </div>
+
         <!-- Item 1 -->
         <div class="gallery-item reveal-scale" data-category="environments">
           <img src="assets/images/gameplay-1.png" alt="Mountain Hermitage" data-full="assets/images/gameplay-1.png">
@@ -861,6 +880,7 @@
       <div class="gallery-modal" id="gallery-modal" aria-hidden="true">
         <button class="gallery-modal-close interactive" id="gallery-close" aria-label="Close Gallery">&times;</button>
         <img src="" alt="Zoomed view image" id="gallery-modal-img">
+        <div class="gallery-modal-video-container" id="gallery-modal-video-container" style="display: none; width: 85vw; max-width: 960px; aspect-ratio: 16/9; box-shadow: 0 0 60px rgba(0, 0, 0, 0.5);"></div>
       </div>
       
       <div class="section-divider">
